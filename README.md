@@ -7,11 +7,11 @@ Build a task management application that allows users to create, update, delete,
 
 Add this in a .env file at the root of the directory.
 ```
-POSTGRES_USER=postgres
+POSTGRES_USER=postgres_user
 POSTGRES_PASSWORD=postgres
 POSTGRES_DB=postgres_db
 
-DATABASE_URL="postgresql://postgres:postgres@postgres:5432/postgres_db?schema=public"
+DATABASE_URL="postgresql://postgres_user:postgres@postgres:5432/postgres_db?schema=public"
 JSON_WEB_TOKEN="1234567890qwertyuiopasdfghjklzxcvbnm"
 ```
 
