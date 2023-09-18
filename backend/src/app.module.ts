@@ -5,9 +5,16 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthGard } from './users/auth/auth.guard';
 import { UserInterceptor } from './users/interceptors/user.interceptor';
 import { TasksModule } from './tasks/tasks.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule, PrismaModule, TasksModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: "../../.env"
+    }),
+    UsersModule,
+    PrismaModule,
+    TasksModule],
   controllers: [],
   providers: [ {
     provide: APP_GUARD,
