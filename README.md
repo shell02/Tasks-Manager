@@ -5,7 +5,7 @@ Build a task management application that allows users to create, update, delete,
 
 ## Setup
 
-Add this in a .env file at the root of the directory.
+Add this in a .env file in the backend directory.
 ```
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
