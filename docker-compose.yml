@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./data/tasks/:/var/lib/postgresql/data/
+      - ../data/tasks/:/var/lib/postgresql/data/
     networks:
       - task_network
 
