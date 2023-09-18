@@ -5,16 +5,14 @@ Build a task management application that allows users to create, update, delete,
 
 ## Setup
 
-Add this in a .env file in the backend directory.
+Add this in a .env file at the root of the directory.
 ```
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_DB=postgres_db
 
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres_db"
+DATABASE_URL="postgresql://postgres:postgres@postgres:5432/postgres_db?schema=public"
 JSON_WEB_TOKEN="1234567890qwertyuiopasdfghjklzxcvbnm"
 ```
 
 Then you can run this command ```docker-compose up --build```.
-
-You may need to add "sudo" before docker-compose.
