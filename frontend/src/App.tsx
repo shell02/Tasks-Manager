@@ -1,19 +1,40 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { AppWrapper } from "./styles/App.styles";
 import { HomeLayout } from "./components/HomeLayout";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Error404 } from "./pages/Error404";
 import { useLoggedIn } from "./hooks/useLoggedIn";
+import { HeaderLayout } from "./components/HeaderLayout";
+import { Dashboard } from "./pages/Dashboard";
+
+const ReloadHome = () => {
+  const navigate = useNavigate();
+
+  const checkLogin = () => {
+    if (!localStorage.getItem("token"))
+      navigate('/')
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      checkLogin();
+		}, 1000);
+
+  })
+
+  return (
+    <></>
+  )
+}
 
 function App() {
 
   const client = new QueryClient();
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
-
 
   return (
     <AppWrapper>
@@ -26,9 +47,14 @@ function App() {
               <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn}/>}/>
             </Route>
             {isLoggedIn &&
-              <Route path="/dashboard" element={<h1>This is the dashboard</h1>}/>
+              <Route element={<HeaderLayout />}>
+                <Route path="/dashboard" element={<Dashboard />}/>
+              </Route>
             }
-            <Route path="*" element={<Error404 isLoggedIn={isLoggedIn}/>} />
+            {!isLoggedIn &&
+                <Route path="/dashboard" element={<ReloadHome />}/>
+            }
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </Router>
       </QueryClientProvider>

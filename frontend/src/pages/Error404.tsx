@@ -1,17 +1,16 @@
 import { useWindowSize } from "../hooks/useWindowSize";
 import { HomeTitle, HomeWrapper } from "../styles/Home.styles";
+import { AppLink } from "../styles/App.styles";
 
-interface Props {
-	isLoggedIn: boolean;
-}
 
-export const Error404 = (props: Props) => {
+export const Error404 = () => {
 
 	const { width, height } = useWindowSize();
-	
+
 	return (
 		<HomeWrapper $width={width} $height={height}>
-			<HomeTitle>Page Not Found</HomeTitle>			
+			<HomeTitle>Page Not Found</HomeTitle>
+			<AppLink to='/'>Back Home</AppLink>		
 		</HomeWrapper>
 	)
 }

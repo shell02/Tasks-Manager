@@ -30,4 +30,9 @@ export class AuthController {
 	editPassword( @Body() body: EditPasswordDTO, @User() user: UserInfo ) {
 		return this.authService.editPassword(body, user.id);
 	}
+
+	@Get('/me')
+	me( @User() user: UserInfo ) {
+		return user;
+	}
 }

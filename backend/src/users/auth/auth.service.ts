@@ -69,6 +69,15 @@ export class AuthService {
 
 	async editProfile( { name, email, password }: EditProfileParams, id: number) : Promise<ProfileDTO> {
 
+		if (email) {
+			const isEmailTaken = await this.prismaService.user.findUnique({ where: {email} });
+
+			if (isEmailTaken) {
+				throw new ConflictException();
+			}
+		}
+
+		
 		const user = await this.prismaService.user.findUnique({ where: {id} });
 		if (!user) {
 			throw new NotFoundException();

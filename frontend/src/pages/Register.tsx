@@ -36,7 +36,12 @@ export const Register = (props: Props) => {
 					localStorage.setItem("token", object.token);
 				});
 				props.setIsLoggedIn(true);
-				navigate('/dashboard');
+				setTimeout(() => {
+					navigate('/dashboard')
+				}, 200);
+				setTimeout(() => {
+					navigate(0)
+				}, 300);
 			}
 			else {
 				const errorInfos = await res.json();
