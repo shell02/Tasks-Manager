@@ -48,7 +48,7 @@ export class AuthService {
 			}
 		})
 
-		return this.generateJWT(user.name, user.id);
+		return {token: this.generateJWT(user.name, user.id)};
 	}
 
 	async signIn( { email, password }: SignInParams ) {
@@ -64,7 +64,7 @@ export class AuthService {
 		if (!isValidPassword)
 			throw new HttpException("Invalid credentials", HttpStatus.BAD_REQUEST);
 
-		return this.generateJWT(user.name, user.id);
+		return {token: this.generateJWT(user.name, user.id)};
 	}
 
 	async editProfile( { name, email, password }: EditProfileParams, id: number) : Promise<ProfileDTO> {

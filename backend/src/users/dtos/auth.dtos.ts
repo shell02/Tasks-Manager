@@ -1,11 +1,12 @@
 import { Exclude } from "class-transformer";
-import { Contains, IsEmail, IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
+import { Contains, IsEmail, IsNotEmpty, IsOptional, IsString, Length, Matches, ValidateIf } from "class-validator";
 
 
 export class SignUpDTO {
 
 	@IsString()
 	@IsNotEmpty()
+	@Matches(/^[a-zA-Z0-9_]+$/)
 	name: string;
 
 
@@ -17,6 +18,7 @@ export class SignUpDTO {
 	@IsString()
 	@IsNotEmpty()
 	@Length(8)
+	@Matches(/^[a-zA-Z0-9!@#$%^&*]+$/)
 	password: string;
 }
 
@@ -29,6 +31,7 @@ export class SignInDTO {
 
 	@IsString()
 	@IsNotEmpty()
+	@Matches(/^[a-zA-Z0-9!@#$%^&*]+$/)
 	password: string;
 }
 
@@ -37,6 +40,7 @@ export class EditProfileDTO {
 	@IsString()
 	@IsNotEmpty()
 	@IsOptional()
+	@Matches(/^[a-zA-Z0-9_]+$/)
 	name: string;
 
 	@IsEmail()
@@ -46,6 +50,7 @@ export class EditProfileDTO {
 
 	@IsString()
 	@IsNotEmpty()
+	@Matches(/^[a-zA-Z0-9!@#$%^&*]+$/)
 	password: string;
 
 	constructor(partial: Partial<EditProfileDTO>) {
@@ -57,11 +62,13 @@ export class EditPasswordDTO {
 
 	@IsString()
 	@IsNotEmpty()
+	@Matches(/^[a-zA-Z0-9!@#$%^&*]+$/)
 	oldPassword: string;
 
 	@IsString()
 	@IsNotEmpty()
 	@Length(8)
+	@Matches(/^[a-zA-Z0-9!@#$%^&*]+$/)
 	newPassword: string;
 }
 
