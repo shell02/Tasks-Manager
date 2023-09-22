@@ -8,8 +8,8 @@ services:
       - 5432:5432
     env_file:
       - .env
-    volumes:
-      - ../data/tasks/:/var/lib/postgresql/data/
+    # volumes:
+    #   - ../data/tasks/:/var/lib/postgresql/data/
     networks:
       - task_network
 
@@ -23,7 +23,7 @@ services:
         db_url: ${DATABASE_URL}
     ports:
       - 3000:3000
-      - 5555:5555 #for npx prisma studio
+      # - 5555:5555 #for npx prisma studio
     networks:
       - task_network
     depends_on:
