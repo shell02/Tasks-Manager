@@ -22,7 +22,6 @@ export const Dashboard = () => {
 
 
 	const sortTasks = (tasks: TaskParam[])=> {
-		console.log("Tasks:", tasks);
 		if (!tasks) {
 			return [];
 		}
@@ -32,8 +31,7 @@ export const Dashboard = () => {
     	const doneTasks: TaskParam[] = [];
 		
 		tasks.forEach((task) => {
-			
-			console.log("Task state: ", task.state);
+		
 			if (task.state === "TODO") {
 				todoTasks.push(task);
 			} else if (task.state === "ONGOING") {
@@ -51,6 +49,7 @@ export const Dashboard = () => {
 
 	const { data, refetch, isLoading } = useQuery(["GetTasks"], async () => {
 
+		setMessage("");
 		const token = localStorage.getItem("token");
 
 		return fetch("http://localhost:3000/tasks", {
@@ -83,6 +82,13 @@ export const Dashboard = () => {
 	});
 
 	useEffect(() => {
+		setTimeout(() => {
+			setMessage("");
+			refetch();
+		}, 500);
+	}, [])
+
+	useEffect(() => {
 		
 	}, [data]);
 
@@ -97,15 +103,15 @@ export const Dashboard = () => {
 				<TaskForm refetch={refetch} />
 				<TaskWrapper $type="TODO">
 					<TaskTitle>TODO</TaskTitle>
-					{todo && todo.map((task, key) => <Task key={key} id={task.id} state="TODO" priority={task.priority} content={task.content}/>)}
+					{todo && todo.map((task, key) => <Task key={key} refetch={refetch} id={task.id} state="TODO" priority={task.priority} content={task.content}/>)}
 				</TaskWrapper>
 				<TaskWrapper $type="ONGOING">
 				<TaskTitle>ONGOING</TaskTitle>
-					{ongoing && ongoing.map((task, key) => <Task key={key} id={task.id} state="ONGOING" priority={task.priority} content={task.content}/>)}
+					{ongoing && ongoing.map((task, key) => <Task key={key} refetch={refetch} id={task.id} state="ONGOING" priority={task.priority} content={task.content}/>)}
 				</TaskWrapper>
 				<TaskWrapper $type="DONE">
 					<TaskTitle>DONE</TaskTitle>
-					{done && done.map((task, key) => <Task key={key} id={task.id} state="DONE" priority={task.priority} content={task.content}/>)}
+					{done && done.map((task, key) => <Task key={key} refetch={refetch} id={task.id} state="DONE" priority={task.priority} content={task.content}/>)}
 				</TaskWrapper>
 				</>
 			}

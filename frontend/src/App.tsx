@@ -10,6 +10,29 @@ import { Error404 } from "./pages/Error404";
 import { useLoggedIn } from "./hooks/useLoggedIn";
 import { HeaderLayout } from "./components/HeaderLayout";
 import { Dashboard } from "./pages/Dashboard";
+import { HomeTitle } from "./styles/Home.styles";
+
+const ReloadDashboard = () => {
+  const navigate = useNavigate();
+
+  const checkLogin = () => {
+    if (localStorage.getItem("token"))
+      navigate('/dashboard');
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      checkLogin();
+		}, 500);
+
+  })
+
+  return (
+    <>
+      
+    </>
+  )
+}
 
 const ReloadHome = () => {
   const navigate = useNavigate();
@@ -27,7 +50,9 @@ const ReloadHome = () => {
   })
 
   return (
-    <></>
+    <>
+      <HomeTitle>Unauthorized access</HomeTitle>
+    </>
   )
 }
 
@@ -36,23 +61,38 @@ function App() {
   const client = new QueryClient();
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
 
+  const closeWindow = () => {
+      window.addEventListener("beforeunload", () => {
+        localStorage.removeItem("token");
+      });
+  };
+
+  useEffect(() => {
+      closeWindow();
+  }, []);
+
   return (
     <AppWrapper>
       <QueryClientProvider client={client}>
         <Router>
           <Routes>
-            <Route element={<HomeLayout />}>
-              <Route path="/" element={<Home />}/>
-              <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-              <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn}/>}/>
-            </Route>
             {isLoggedIn &&
               <Route element={<HeaderLayout />}>
                 <Route path="/dashboard" element={<Dashboard />}/>
+                <Route path='/' element={<ReloadDashboard />} />
+                <Route path="/login" element={<ReloadDashboard />}/>
+                <Route path="/register" element={<ReloadDashboard />}/>
               </Route>
             }
             {!isLoggedIn &&
+              <>
                 <Route path="/dashboard" element={<ReloadHome />}/>
+                <Route element={<HomeLayout />}>
+                  <Route path="/" element={<Home />}/>
+                  <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
+                  <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn}/>}/>
+                </Route>
+              </>
             }
             <Route path="*" element={<Error404 />} />
           </Routes>

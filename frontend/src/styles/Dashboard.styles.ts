@@ -100,3 +100,48 @@ export const TaskFormSubmit = styled.input`
 	}
 `
 
+export const SingleTaskForm = styled.form`
+	width: fit-content;
+	height: 100%;
+	display: inline-block;
+`
+
+export const SingleTaskSelect = styled.select`
+	background: transparent;
+	border: solid azure 1px;
+	color: black;
+	border: none;
+	margin: 0px 10px;
+	width: 22px;
+`
+
+export const SingleTaskInput = styled.input`
+	width: 50%;
+	padding: 2px;
+	color: azure;
+	background-color: rgba(0, 0, 0, 0.06);
+	border-style: none none solid none;
+	border-width: 0px;
+	transition: border-width 0.2s ease, background-color 0.2s ease;
+	&:hover {
+		border-width: 2px;
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+	&:focus {
+		border-style: none none solid none;
+		border-width: 2px;
+		background-color: rgba(0, 0, 0, 0.06);
+	}
+
+`
+
+export const SingleTaskButton = styled.button`
+	background: transparent;
+	border: none;
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+	color: azure;
+	cursor: pointer;
+
+`

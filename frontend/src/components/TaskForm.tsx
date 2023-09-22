@@ -20,7 +20,6 @@ export const TaskForm = (props: Props) => {
 	const { data, refetch } = useQuery(["NewTask"], async () => {
 
 		const token = localStorage.getItem("token");
-		console.log("Why content here")
 
 		const body = {
 			content,
@@ -38,6 +37,7 @@ export const TaskForm = (props: Props) => {
 			const infos = await res.json();
 			if (res.ok) {
 				props.refetch();
+				setMessage("");
 			}
 			else {
 				let errorMessage: string = "";
@@ -68,9 +68,9 @@ export const TaskForm = (props: Props) => {
 	const onSubmit = (data: FieldValues) => {
 		if (errors.content || !content)
 			return ;
+		setMessage("");
 		refetch();
 		setContent("");
-		setMessage("");
 	}
 
 	const handlePriorityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
