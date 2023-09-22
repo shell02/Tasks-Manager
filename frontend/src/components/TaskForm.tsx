@@ -19,7 +19,7 @@ export const TaskForm = (props: Props) => {
 
 	const { data, refetch } = useQuery(["NewTask"], async () => {
 
-		const token = localStorage.getItem("token");
+		const token = sessionStorage.getItem("token");
 
 		const body = {
 			content,

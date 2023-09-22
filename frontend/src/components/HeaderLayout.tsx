@@ -17,7 +17,7 @@ export const HeaderLayout = () => {
 	const navigate = useNavigate();
 
 	const onDisconnect = () => {
-		localStorage.removeItem("token");
+		sessionStorage.removeItem("token");
 		setLogin(false);
 		setTimeout(() => {
 			navigate('/')

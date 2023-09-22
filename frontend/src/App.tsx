@@ -16,7 +16,7 @@ const ReloadDashboard = () => {
   const navigate = useNavigate();
 
   const checkLogin = () => {
-    if (localStorage.getItem("token"))
+    if (sessionStorage.getItem("token"))
       navigate('/dashboard');
   }
 
@@ -38,7 +38,7 @@ const ReloadHome = () => {
   const navigate = useNavigate();
 
   const checkLogin = () => {
-    if (!localStorage.getItem("token"))
+    if (!sessionStorage.getItem("token"))
       navigate('/')
   }
 
@@ -61,15 +61,15 @@ function App() {
   const client = new QueryClient();
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
 
-  const closeWindow = () => {
-      window.addEventListener("beforeunload", () => {
-        localStorage.removeItem("token");
-      });
-  };
+  // const closeWindow = () => {
+  //     window.addEventListener("beforeunload", () => {
+  //       sessionStorage.removeItem("token");
+  //     });
+  // };
 
-  useEffect(() => {
-      closeWindow();
-  }, []);
+  // useEffect(() => {
+  //     closeWindow();
+  // }, []);
 
   return (
     <AppWrapper>

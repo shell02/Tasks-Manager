@@ -17,7 +17,7 @@ export const Edit = () => {
 	const [newPassword, setNewPassword] = useState<string>("");
 	
 	const { data: profileData, refetch: refetchProfile } = useQuery(["EditProfile"], async () => {
-		const token = await localStorage.getItem("token");
+		const token = await sessionStorage.getItem("token");
 		
 		const body = {
 			...(username && {name: username}),
@@ -56,7 +56,7 @@ export const Edit = () => {
 
 	const { data: passwordData, refetch: refetchPassword } = useQuery(["EditPassword"], async () => {
 
-		const token = await localStorage.getItem("token");
+		const token = await sessionStorage.getItem("token");
 
 		const body = {
 			oldPassword,

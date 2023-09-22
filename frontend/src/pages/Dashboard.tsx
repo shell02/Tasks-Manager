@@ -50,7 +50,7 @@ export const Dashboard = () => {
 	const { data, refetch, isLoading } = useQuery(["GetTasks"], async () => {
 
 		setMessage("");
-		const token = localStorage.getItem("token");
+		const token = sessionStorage.getItem("token");
 
 		return fetch("http://localhost:3000/tasks", {
 			method: "GET",

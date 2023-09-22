@@ -33,7 +33,7 @@ export const Register = (props: Props) => {
 		}).then(async (res) => {
 			if (res?.status === 201) {
 				res.json().then((object) => {
-					localStorage.setItem("token", object.token);
+					sessionStorage.setItem("token", object.token);
 				});
 				props.setIsLoggedIn(true);
 				navigate("/dashboard");
@@ -83,7 +83,7 @@ export const Register = (props: Props) => {
 				{errors.password && <HomeToolTip>{errors.password?.message}</HomeToolTip>}
 				<RegisterInput type="password" placeholder=" Confirm Password" {...register("confirmPassword")}/>
 				{errors.confirmPassword && <HomeToolTip>{errors.confirmPassword?.message}</HomeToolTip>}
-				<RegisterSubmit type="submit" />
+				<RegisterSubmit type="submit" value="Submit"/>
 			</RegisterForm>
 		</>
 	)

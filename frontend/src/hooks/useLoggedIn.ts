@@ -5,7 +5,7 @@ export const useLoggedIn = () : [boolean, React.Dispatch<React.SetStateAction<bo
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (localStorage.getItem("token") !== null)
+		if (sessionStorage.getItem("token") !== null)
 			setIsLoggedIn(true);
 	}, []);
   

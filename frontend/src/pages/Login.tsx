@@ -31,7 +31,7 @@ export const Login = (props: Props) => {
 		}).then(async (res) => {
 			if (res?.status === 201) {
 				res.json().then((object) => {
-					localStorage.setItem("token", object.token);
+					sessionStorage.setItem("token", object.token);
 				});
 				props.setIsLoggedIn(true);
 					navigate('/dashboard')
@@ -76,7 +76,7 @@ export const Login = (props: Props) => {
 				{errors.email && <HomeToolTip>{errors.email.message}</HomeToolTip>}
 				<RegisterInput type="password" placeholder="Password" {...register("password")} onChange={(event) => setPassword(event?.target.value)}/>
 				{errors.password && <HomeToolTip>{errors.password.message}</HomeToolTip>}
-				<RegisterSubmit type="submit" />
+				<RegisterSubmit type="submit"  value="Submit"/>
 			</RegisterForm>
 			
 			
