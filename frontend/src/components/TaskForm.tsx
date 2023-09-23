@@ -4,7 +4,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
 import { HomeToolTip } from "../styles/Home.styles";
-import { TaskFormInput, TaskFormLabel, TaskFormSelect, TaskFormWrapper, TaskFormSubmit } from "../styles/Dashboard.styles";
+import { TaskFormInput, TaskFormLabel, TaskFormSelect, TaskFormWrapper, TaskFormSubmit, TaskFormOption } from "../styles/Dashboard.styles";
 
 interface Props {
 	refetch: () => any
@@ -36,6 +36,7 @@ export const TaskForm = (props: Props) => {
 		}).then(async (res) => {
 			const infos = await res.json();
 			if (res.ok) {
+				setContent("");
 				props.refetch();
 				setMessage("");
 			}
@@ -86,14 +87,14 @@ export const TaskForm = (props: Props) => {
 			{message && <HomeToolTip>{message}</HomeToolTip>}
 			<TaskFormWrapper>
 				<form  onSubmit={handleSubmit(onSubmit)}>
-					<TaskFormInput type="text" placeholder="New Task..."  {...register("content")} value={content} onChange={(event) => {setContent(event.target.value)}}/>
+					<TaskFormInput type="text" placeholder="New Task..."  {...register("content")} value={content} onChange={(event) => setContent(event.target.value)}/>
 					{errors.content && <HomeToolTip>{errors.content.message}</HomeToolTip>}
 					<TaskFormLabel>
-						Task Level of Priority :
+						Priority :
 						<TaskFormSelect  {...register("priority")} name="priority"  onChange={handlePriorityChange} value={priority}>
-							<option value="LOW">LOW</option>
-							<option value="MEDIUM" >MEDIUM</option>
-							<option value="HIGH" >HIGH</option>
+							<TaskFormOption value="LOW">LOW</TaskFormOption>
+							<TaskFormOption value="MEDIUM" >MEDIUM</TaskFormOption>
+							<TaskFormOption value="HIGH" >HIGH</TaskFormOption>
 						</TaskFormSelect>
 					</TaskFormLabel>
 					<TaskFormSubmit type="submit" value="Submit" />

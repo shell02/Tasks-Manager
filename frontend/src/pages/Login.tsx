@@ -42,7 +42,6 @@ export const Login = (props: Props) => {
 					setErrorMessage(errorInfos.message[0]);
 				else
 					setErrorMessage(errorInfos.message);
-				console.log(errorInfos);
 			}
 			return res;
 		})
@@ -72,9 +71,9 @@ export const Login = (props: Props) => {
 			<HomeReturnText to="/">Back</HomeReturnText>
 
 			<RegisterForm onSubmit={handleSubmit(onSubmit)}>
-				<RegisterInput type="text" placeholder="Email" {...register("email")} onChange={(event) => setEmail(event?.target.value)}/>
+				<RegisterInput type="text" placeholder="Email..." {...register("email")} onChange={(event) => setEmail(event?.target.value)}/>
 				{errors.email && <HomeToolTip>{errors.email.message}</HomeToolTip>}
-				<RegisterInput type="password" placeholder="Password" {...register("password")} onChange={(event) => setPassword(event?.target.value)}/>
+				<RegisterInput type="password" placeholder="Password..." {...register("password")} onChange={(event) => setPassword(event?.target.value)}/>
 				{errors.password && <HomeToolTip>{errors.password.message}</HomeToolTip>}
 				<RegisterSubmit type="submit"  value="Submit"/>
 			</RegisterForm>

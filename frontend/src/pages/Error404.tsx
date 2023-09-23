@@ -1,6 +1,5 @@
 import { useWindowSize } from "../hooks/useWindowSize";
-import { HomeTitle, HomeWrapper } from "../styles/Home.styles";
-import { AppLink } from "../styles/App.styles";
+import { HomeReturnText, HomeTitle, HomeWrapper } from "../styles/Home.styles";
 
 
 export const Error404 = () => {
@@ -10,7 +9,7 @@ export const Error404 = () => {
 	return (
 		<HomeWrapper $width={width} $height={height}>
 			<HomeTitle>Page Not Found</HomeTitle>
-			<AppLink to='/'>Back Home</AppLink>		
+			<HomeReturnText to='/'>Back Home</HomeReturnText>		
 		</HomeWrapper>
 	)
 }

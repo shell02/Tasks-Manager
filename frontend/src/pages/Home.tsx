@@ -1,19 +1,35 @@
-import { HomeButton, HomeButtonIcon, HomeButtonText, HomeTitle } from "../styles/Home.styles";
+import { useNavigate } from "react-router-dom";
+import { HomeButtonIcon, HomeButtonText, HomeDiv, HomeTitle } from "../styles/Home.styles";
 import { FiLogIn } from "react-icons/fi";
 
 export const Home = () => {
 
+	const navigate = useNavigate();
+
+	const onClickLogin = () => {
+		navigate("/login");
+	}
+
+
+	const onClickRegister = () => {
+		navigate("/register");
+	}
+
 	return (
 		<>
 			<HomeTitle>Tasks Manager</HomeTitle>
-			<HomeButton to='/login'>
-				<HomeButtonText>Login</HomeButtonText>
-				<HomeButtonIcon><FiLogIn size={25} /></HomeButtonIcon>
-			</HomeButton>
-			<HomeButton to='/register'>
+			<HomeDiv onClick={onClickLogin}>
+				<div style={{ width: "85%" }}>
+					<HomeButtonText>Login</HomeButtonText>
+				</div>
+				<HomeButtonIcon><FiLogIn size={25}/></HomeButtonIcon>
+			</HomeDiv>
+			<HomeDiv onClick={onClickRegister}>
+				<div style={{ width: "85%" }}>
 				<HomeButtonText>Register</HomeButtonText>
-				<HomeButtonIcon $top={300} $anim={298}><FiLogIn size={25} /></HomeButtonIcon>
-			</HomeButton>			
+				</div>
+				<HomeButtonIcon><FiLogIn size={25}/></HomeButtonIcon>
+			</HomeDiv>
 		</>
 	)
 }

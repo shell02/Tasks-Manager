@@ -4,6 +4,7 @@ import { DashboardWrapper, TaskTitle, TaskWrapper } from "../styles/Dashboard.st
 import { useQuery } from "@tanstack/react-query";
 import { HomeToolTip } from "../styles/Home.styles";
 import { Task } from "../components/Task";
+import { useNavigate } from "react-router-dom";
 
 interface TaskParam {
 	id: number;
@@ -20,6 +21,7 @@ export const Dashboard = () => {
 	const [ongoing, setOngoing] = useState<TaskParam[]>([]);
 	const [done, setDone] = useState<TaskParam[]>([]);
 
+	const navigate = useNavigate();
 
 	const sortTasks = (tasks: TaskParam[])=> {
 		if (!tasks) {
@@ -60,12 +62,13 @@ export const Dashboard = () => {
 		}).then(async (res) => {
 			const tasks = await res.json();
 			const empty: TaskParam[] = [];
+			setTodos(empty);
+				setOngoing(empty);
+				setDone(empty);
 			if (res.ok) {
 				sortTasks(tasks);
 			} else if (res.status === 404) {
-				setTodos(empty);
-				setOngoing(empty);
-				setDone(empty);
+				
 			} else {
 				let errorMessage: string = "";
 				if (tasks.error) {
@@ -86,7 +89,7 @@ export const Dashboard = () => {
 			setMessage("");
 			refetch();
 		}, 500);
-	}, [])
+	}, []);
 
 	useEffect(() => {
 		
@@ -101,18 +104,20 @@ export const Dashboard = () => {
 				!isLoading && <>
 				{message && <HomeToolTip>{message}</HomeToolTip>}
 				<TaskForm refetch={refetch} />
-				<TaskWrapper $type="TODO">
-					<TaskTitle>TODO</TaskTitle>
-					{todo && todo.map((task, key) => <Task key={key} refetch={refetch} id={task.id} state="TODO" priority={task.priority} content={task.content}/>)}
-				</TaskWrapper>
-				<TaskWrapper $type="ONGOING">
-				<TaskTitle>ONGOING</TaskTitle>
-					{ongoing && ongoing.map((task, key) => <Task key={key} refetch={refetch} id={task.id} state="ONGOING" priority={task.priority} content={task.content}/>)}
-				</TaskWrapper>
-				<TaskWrapper $type="DONE">
-					<TaskTitle>DONE</TaskTitle>
-					{done && done.map((task, key) => <Task key={key} refetch={refetch} id={task.id} state="DONE" priority={task.priority} content={task.content}/>)}
-				</TaskWrapper>
+				<div style={{ display: "flex", justifyContent: "space-evenly", flexWrap: "wrap", marginTop: "30px" }}>
+					<TaskWrapper $type="TODO">
+						<TaskTitle>TODO</TaskTitle>
+						{todo && todo.map((task) => <Task key={task.id} refetch={refetch} id={task.id} state="TODO" priority={task.priority} content={task.content}/>)}
+					</TaskWrapper>
+					<TaskWrapper $type="ONGOING">
+					<TaskTitle>ONGOING</TaskTitle>
+						{ongoing && ongoing.map((task) => <Task key={task.id} refetch={refetch} id={task.id} state="ONGOING" priority={task.priority} content={task.content}/>)}
+					</TaskWrapper>
+					<TaskWrapper $type="DONE">
+						<TaskTitle>DONE</TaskTitle>
+						{done && done.map((task) => <Task key={task.id} refetch={refetch} id={task.id} state="DONE" priority={task.priority} content={task.content}/>)}
+					</TaskWrapper>
+				</div>
 				</>
 			}
 		</DashboardWrapper>

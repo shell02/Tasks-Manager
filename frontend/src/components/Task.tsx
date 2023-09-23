@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { useForm, FieldValues } from "react-hook-form";
-import { SingleTaskWrapper, SingleTaskForm, SingleTaskInput, TaskFormSelect, SingleTaskSelect, SingleTaskButton } from "../styles/Dashboard.styles";
+import { SingleTaskWrapper, SingleTaskForm, SingleTaskInput, TaskFormSelect, SingleTaskSelect, SingleTaskButton, TaskFormOption } from "../styles/Dashboard.styles";
 import { BsCheck2All } from "react-icons/bs";
 import { MdDeleteOutline, MdSettingsBackupRestore } from "react-icons/md";
 import * as yup from "yup";
@@ -42,8 +42,8 @@ export const Task = (props: Props) => {
 		}).then(async (res) => {
 			const infos = await res.json();
 			if (res.ok) {
-				props.refetch();
 				setMessage("");
+				props.refetch();
 			}
 			else {
 				let errorMessage: string = "";
@@ -74,6 +74,7 @@ export const Task = (props: Props) => {
 			const infos = await res.json();
 			if (res.ok) {
 				setMessage("");
+				props.refetch();
 			}
 			else {
 				let errorMessage: string = "";
@@ -135,21 +136,20 @@ export const Task = (props: Props) => {
 	}, []);
 
 	return (
-		<SingleTaskWrapper $bg_color={props.priority}>
+		<SingleTaskWrapper $bg_color={props.priority} $type={props.state}>
 			<SingleTaskForm onSubmit={handleSubmit(onSubmit)}>
 
 				{message && <HomeToolTip>{message}</HomeToolTip>}
-
-				<SingleTaskInput type="text" value={content} {...register("content")} onChange={(event) => setContent(event.target.value)}></SingleTaskInput>
+				<SingleTaskInput value={content} {...register("content")} onChange={(event) => setContent(event.target.value)}></SingleTaskInput>
 				<SingleTaskSelect  {...register("priority")} name="priority"  onChange={handlePriorityChange} value={priority}>
-					<option value="LOW">LOW</option>
-					<option value="MEDIUM" >MEDIUM</option>
-					<option value="HIGH" >HIGH</option>
+					<TaskFormOption $type={props.state} value="LOW">LOW</TaskFormOption>
+					<TaskFormOption $type={props.state} value="MEDIUM" >MEDIUM</TaskFormOption>
+					<TaskFormOption $type={props.state} value="HIGH" >HIGH</TaskFormOption>
 				</SingleTaskSelect>
 				<SingleTaskSelect  {...register("state")} name="state"  onChange={handleStateChange} value={state}>
-					<option value="TODO">TODO</option>
-					<option value="ONGOING" >ONGOING</option>
-					<option value="DONE" >DONE</option>
+					<TaskFormOption $type={props.state} value="TODO">TODO</TaskFormOption>
+					<TaskFormOption $type={props.state} value="ONGOING" >ONGOING</TaskFormOption>
+					<TaskFormOption $type={props.state} value="DONE" >DONE</TaskFormOption>
 				</SingleTaskSelect>
 				<SingleTaskButton type="submit" ><BsCheck2All size={(25)}/></SingleTaskButton>
 			</SingleTaskForm>

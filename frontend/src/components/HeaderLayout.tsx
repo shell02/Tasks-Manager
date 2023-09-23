@@ -30,7 +30,7 @@ export const HeaderLayout = () => {
 	return (
 		<>
 			<HeaderWrapper>
-				<HeaderLink to='/dashboard'><h1>Task Manager</h1></HeaderLink>
+				<HeaderLink to='/dashboard'><h1 style={{ marginLeft: "15px" }}>Task Manager</h1></HeaderLink>
 				<HeaderButton $rigth={80} onClick={() => {setShowProfile(!showProfile)}}><LuMenuSquare size={35} /></HeaderButton>
 				<HeaderButton onClick={onDisconnect}><FiLogOut size={35} /></HeaderButton>
 

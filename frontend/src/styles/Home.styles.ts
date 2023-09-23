@@ -13,61 +13,48 @@ export const HomeWrapper = styled.div<{ $width: number; $height: number }>`
 	grid-area: main;
 	margin: 20px auto;
 
-	border: solid wheat 2px;
+	border: solid azure 2px;
 	border-radius: 20px;
-	backdrop-filter: contrast(110%);
+	backdrop-filter: contrast(100%) blur(2px);
 	box-shadow: 1px 1px 2px azure;
 `
 	
 export const HomeTitle = styled.h1`
-	color: azure;
 	margin-top: 50px;
-	margin-bottom: 130px;
+	margin-bottom: 150px;
 	text-align: center;
 `
 
-export const HomeButton = styled(AppLink)`
-	display: block;
-	margin: 10px auto;
+export const HomeDiv = styled.div`
+	display: flex;
+	margin: 20px auto;
 	width: 90%;
-	height: 60px;
-	background-color: rgba(0, 0, 0, 0.01);
+	background-color: rgba(0, 0, 0, 0.06);
 	border-style: none none solid none;
 	border-width: 0px;
-	transition: border-width 0.2s ease, background-color 0.2s ease;
-	&:hover {
+	transition: border-width 0.1s ease, background-color 0.1s ease;
+	&:hover, &:focus {
 		border-width: 3px;
-		background-color: rgba(0, 0, 0, 0.06);
+		background-color: rgba(0, 0, 0, 0.1);
 	}
+
 `
 
 export const HomeButtonText = styled.p`
-	color: azure;
-	font-size: 20px;
-	text-align: left;
 	margin-left: 25px;
-	margin-top: 13px;
-	position: fixed;
 `
 
-export const HomeButtonIcon = styled.div<{ $top?: number; $anim?: number; }>`
-	width: 50px;
-	height: 50px;
-	color: azure;
-	position: absolute;
-	right: 50px;
-	top: ${props => props.$top || "228"}px;
-	transition: top 0.2s ease;
-	&:hover {
-		top: ${props => props.$anim || "226"}px;
-	}
+export const HomeButtonIcon = styled.div<{ $size?: number; }>`
+	margin-top: 0.8em;
+	
 `
 
 export const HomeReturnText = styled(AppLink)`
-	font-size: 13px;
+	font-size: 0.8em;
 	position: absolute;
-	bottom: 20px;
+	bottom: 5%;
 	right: 30px;
+	font-weight: bolder;
 `
 
 export const HomeToolTip = styled.p`
@@ -77,17 +64,14 @@ export const HomeToolTip = styled.p`
 	height: fit-content;
 	position: relative;
 	display: inline;
-	color: azure;
 	font-size: 12px;
 	margin-left: 25px;
 	vertical-align: middle;
 	text-align: center;
 	padding: 4px 10px;
-
 `
 
 export const RegisterTitle = styled.h1`
-	color: azure;
 	margin-top: 50px;
 	margin-bottom: 60px;
 	text-align: center;
@@ -103,19 +87,14 @@ export const RegisterInput = styled.input`
 	width: 90%;
 	height: 30px;
 	margin: 10px 4%;
-	color: azure;
-	background-color: rgba(0, 0, 0, 0.01);
+	color: inherit;
+	background-color: rgba(0, 0, 0, 0.06);
 	border-style: none none solid none;
 	border-width: 0px;
 	transition: border-width 0.2s ease, background-color 0.2s ease;
-	&:hover {
+	&:hover, &:focus {
 		border-width: 2px;
-		background-color: rgba(0, 0, 0, 0.06);
-	}
-	&:focus {
-		border-style: none none solid none;
-		border-width: 2px;
-		background-color: rgba(0, 0, 0, 0.06);
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 `
 
@@ -125,12 +104,12 @@ export const RegisterSubmit = styled.input`
 	margin: 10px auto 0px;
 	height: fit-content;
 	padding: 2px;
-	color: azure;
+	color: inherit;
 	background-color: rgba(0, 0, 0, 0.01);
 	border-style: solid;
 	border-width: 1px;
 	transition: background-color 0.2s ease;
-	&:hover {
+	&:hover, &:focus {
 		background-color: azure;
 		color: rgb(0, 0, 0);
 	}

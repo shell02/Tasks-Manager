@@ -22,8 +22,10 @@ export const AppLink = styled(Link)<{ $color?: string; }>`
 
 export const AppWrapper = styled.div`
 
-	background: RoyalBlue;
-	width: 100vw;
+	background-image: url(../assets/night_sky_1.jpg);
+	background-size: cover;
+	background-position: center;
+	min-width: 100vw;
 	min-height: 100vh;
 
 	display: grid;
@@ -31,6 +33,7 @@ export const AppWrapper = styled.div`
 	grid-template-rows: 80px auto;
 
 	font-family: "Helvetica Neue", "Arial", sans-serif;
+	color: azure;
 
 
 `
