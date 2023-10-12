@@ -3,8 +3,6 @@
 ## Project
 Build a task management application that allows users to create, update, delete, and prioritize tasks. The project will consist of a web application developed in React (for the frontend) and a backend API built with NestJS.
 
-You can visit the website at https://tasks-manager-shdorlin.vercel.app/ or install it locally.
-
 ## Setup
 
 Add this in a .env file at the root of the directory.
